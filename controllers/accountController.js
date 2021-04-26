@@ -49,9 +49,10 @@ const validateBalance = async (account) => {
 
 const fixbalance = async (req, res) => {
   const account = req.params;
-  const balance = req.body;
+  const { balance } = req.body;
   try {
     let newAccount = await validateAccount(account);
+    console.log(balance);
     newAccount.balance = balance;
     newAccount = new Account(newAccount);
     await newAccount.save();
