@@ -3,6 +3,8 @@ import controller from '../controllers/accountController.js';
 
 export const route = express();
 
+route.put('/account/fixbalance/:agencia/:conta', controller.fixbalance);
+
 route.patch('/account/deposit/', controller.deposit);
 route.patch('/account/withdraw/', controller.withdraw);
 route.patch('/account/transfer/', controller.transfer);

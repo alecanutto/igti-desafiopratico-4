@@ -47,6 +47,20 @@ const validateBalance = async (account) => {
   }
 };
 
+const fixbalance = async (req, res) => {
+  const account = req.params;
+  const balance = req.body;
+  try {
+    let newAccount = await validateAccount(account);
+    newAccount.balance = balance;
+    newAccount = new Account(newAccount);
+    await newAccount.save();
+    res.send(newAccount);
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const deposit = async (req, res) => {
   const account = req.body;
   try {
@@ -177,7 +191,7 @@ const topbybalancehighest = async (req, res) => {
   }
 };
 
-const transfertoprivate = async (req, res) => {
+const transfertoprivate = async (_, res) => {
   try {
     const pipeline = [
       {
@@ -205,6 +219,7 @@ const transfertoprivate = async (req, res) => {
 };
 
 export default {
+  fixbalance,
   deposit,
   withdraw,
   checkbalance,
